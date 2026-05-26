@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Admin User (Single user per project - managed by Supabase Auth)
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+// Worker Model
+model Worker {
+  id               String    @id @default(cuid())
+  name             String
+  phone            String?
+  department       String?
+  category         String?
+  photoUrl         String?
+  joinDate         DateTime
+  isActive         Boolean   @default(true)
+  salaryType       SalaryType
+  salaryAmount     Float
+  designatedLeaves Int       @default(12)
+  leaveCarryover   Boolean   @default(false) // Can unused leaves carry forward?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  attendance Attendance[]
+
+  @@index([isActive])
+  @@index([createdAt])
+  @@map("workers")
+}
+
+// Attendance Record
+model Attendance {
+  id        String           @id @default(cuid())
+  workerId  String
+  worker    Worker           @relation(fields: [workerId], references: [id], onDelete: Cascade)
+  date      DateTime         @db.Date
+  status    AttendanceStatus
+  note      String?
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  @@unique([workerId, date])
+  @@index([workerId])
+  @@index([date])
+  @@map("attendance")
+}
+
+// Salary Type Enum
+enum SalaryType {
+  DAILY
+  WEEKLY
+  MONTHLY
+  QUARTERLY
+}
+
+// Attendance Status Enum
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+  HALF_DAY
+  ON_LEAVE
+}
