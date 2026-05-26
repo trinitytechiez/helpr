@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Providers } from "@/components/Providers";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -50,7 +51,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#10b981" />
       </head>
       <body className="min-h-screen bg-white text-gray-900 antialiased">
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
