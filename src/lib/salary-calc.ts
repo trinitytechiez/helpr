@@ -1,4 +1,4 @@
-import { SalaryType, AttendanceStatus } from "../generated/prisma";
+import { SalaryType, AttendanceStatus } from "../generated/prisma/enums";
 import { getWorkingDaysInMonth, getWorkingDaysInQuarter } from "./utils";
 
 export interface SalaryCalculationInput {
