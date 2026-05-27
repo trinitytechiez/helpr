@@ -7,19 +7,19 @@ import Link from "next/link";
 import { useHelpers, useDeleteWorker } from "@/hooks/useHelpers";
 import { formatDate } from "@/lib/utils";
 
-export default function WorkersPage() {
-  const { data: workers, isLoading, error } = useHelpers();
-  const deleteWorker = useDeleteWorker();
+export default function HelpersPage() {
+  const { data: helpers, isLoading, error } = useHelpers();
+  const deleteHelper = useDeleteWorker();
   const [searchTerm, setSearchTerm] = useState("");
   const [filterActive, setFilterActive] = useState<boolean | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
 
-  const filteredWorkers = workers?.filter((worker: any) => {
-    const matchesSearch = worker.name
+  const filteredHelpers = helpers?.filter((helper: any) => {
+    const matchesSearch = helper.name
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
     const matchesFilter =
-      filterActive === null ? true : worker.isActive === filterActive;
+      filterActive === null ? true : helper.isActive === filterActive;
     return matchesSearch && matchesFilter;
   });
 
@@ -28,14 +28,8 @@ export default function WorkersPage() {
       {/* Header */}
       <div className="bg-white border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-2xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-2xl font-bold text-gray-900">Workers</h1>
-            <Link
-              href="/helpers/add"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors"
-            >
-              + Add Worker
-            </Link>
+          <div className="mb-4">
+            <h1 className="text-2xl font-bold text-gray-900">Helpers</h1>
           </div>
 
           {/* Search & Filter */}
@@ -89,77 +83,77 @@ export default function WorkersPage() {
         {isLoading ? (
           <div className="text-center py-12">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading workers...</p>
+            <p className="text-gray-600">Loading helpers...</p>
           </div>
         ) : error ? (
           <div className="bg-red-50 border border-red-200 rounded-lg p-4">
             <p className="text-red-700 text-sm">
-              Failed to load workers. Please try again.
+              Failed to load helpers. Please try again.
             </p>
           </div>
-        ) : filteredWorkers?.length === 0 ? (
+        ) : filteredHelpers?.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-600 mb-4">No workers found</p>
+            <p className="text-gray-600 mb-4">No helpers found</p>
             <Link
               href="/helpers/add"
               className="text-blue-600 hover:text-blue-700 font-semibold"
             >
-              Create your first worker
+              Create your first helper
             </Link>
           </div>
         ) : (
           <div className="space-y-4">
-            {filteredWorkers?.map((worker: any) => (
+            {filteredHelpers?.map((helper: any) => (
               <div
-                key={worker.id}
+                key={helper.id}
                 className="bg-white rounded-lg p-4 border border-gray-200 hover:shadow-md transition-shadow"
               >
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex-1">
                     <h3 className="font-semibold text-gray-900">
-                      {worker.name}
+                      {helper.name}
                     </h3>
-                    <p className="text-sm text-gray-600">{worker.category}</p>
+                    <p className="text-sm text-gray-600">{helper.category}</p>
                   </div>
                   <span
                     className={`px-2 py-1 rounded text-xs font-semibold ${
-                      worker.isActive
+                      helper.isActive
                         ? "bg-blue-100 text-blue-800"
                         : "bg-gray-100 text-gray-800"
                     }`}
                   >
-                    {worker.isActive ? "Active" : "Inactive"}
+                    {helper.isActive ? "Active" : "Inactive"}
                   </span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 mb-3 text-sm text-gray-600">
                   <div>
                     <p className="text-xs text-gray-500">Phone</p>
-                    <p>{worker.phone || "-"}</p>
+                    <p>{helper.phone || "-"}</p>
                   </div>
                   <div>
                     <p className="text-xs text-gray-500">Salary Type</p>
-                    <p>{worker.salaryType}</p>
+                    <p>{helper.salaryType}</p>
                   </div>
                   <div>
                     <p className="text-xs text-gray-500">Joined</p>
-                    <p>{formatDate(new Date(worker.joinDate))}</p>
+                    <p>{formatDate(new Date(helper.joinDate))}</p>
                   </div>
                   <div>
                     <p className="text-xs text-gray-500">Salary</p>
-                    <p>₹{worker.salaryAmount.toLocaleString()}</p>
+                    <p>₹{helper.salaryAmount.toLocaleString()}</p>
                   </div>
                 </div>
 
                 <div className="flex gap-2 pt-3 border-t border-gray-200">
                   <Link
-                    href={`/workers/${worker.id}`}
+                    href={`/helpers/${helper.id}`}
                     className="flex-1 text-center px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded transition-colors"
                   >
                     Edit
                   </Link>
                   <button
-                    onClick={() => setDeleteConfirm(worker.id)}
+                    onClick={() => setDeleteConfirm(helper.id)}
                     className="flex-1 px-3 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded transition-colors"
                   >
                     Delete
@@ -167,7 +161,7 @@ export default function WorkersPage() {
                 </div>
 
                 {/* Delete Confirmation */}
-                {deleteConfirm === worker.id && (
+                {deleteConfirm === helper.id && (
                   <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded">
                     <p className="text-sm text-red-900 mb-2">
                       Are you sure? This cannot be undone.
@@ -175,7 +169,7 @@ export default function WorkersPage() {
                     <div className="flex gap-2">
                       <button
                         onClick={() => {
-                          deleteWorker.mutate(worker.id);
+                          deleteHelper.mutate(helper.id);
                           setDeleteConfirm(null);
                         }}
                         className="flex-1 px-2 py-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded"

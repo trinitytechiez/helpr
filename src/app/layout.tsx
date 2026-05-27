@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "@/components/Providers";
+import { BottomNav } from "@/components/BottomNav";
+import { FloatingActionButton } from "@/components/FloatingActionButton";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -51,7 +53,11 @@ export default function RootLayout({
         <meta name="theme-color" content="#3b82f6" />
       </head>
       <body className="min-h-screen bg-white text-gray-900 antialiased">
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <BottomNav />
+          <FloatingActionButton />
+        </Providers>
       </body>
     </html>
   );
