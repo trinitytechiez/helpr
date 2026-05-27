@@ -12,7 +12,7 @@ export function useDashboardStats() {
   });
 }
 
-export function useWorkersOnLeaveToday() {
+export function useHelpersOnLeaveToday() {
   return useQuery({
     queryKey: ["workers", "on-leave-today"],
     queryFn: async () => {

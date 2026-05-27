@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 const navItems = [
   { name: "Dashboard", path: "/dashboard", icon: "🏠" },
-  { name: "Workers", path: "/workers", icon: "👥" },
+  { name: "Workers", path: "/helpers", icon: "👥" },
   { name: "Attendance", path: "/attendance", icon: "✓" },
   { name: "Reports", path: "/reports", icon: "📊" },
 ];
@@ -25,7 +25,7 @@ export function BottomNav() {
               href={item.path}
               className={`flex-1 h-full flex flex-col items-center justify-center gap-1 transition-colors ${
                 isActive
-                  ? "text-green-600 border-t-2 border-green-600"
+                  ? "text-blue-600 border-t-2 border-blue-600"
                   : "text-gray-600 hover:text-gray-900"
               }`}
             >

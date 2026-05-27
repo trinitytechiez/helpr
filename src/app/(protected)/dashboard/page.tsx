@@ -7,8 +7,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase";
 import { SignOutButton } from "@/components/SignOutButton";
-import { useDashboardStats, useWorkersOnLeaveToday } from "@/hooks/useDashboard";
-import { useWorkers } from "@/hooks/useWorkers";
+import { useDashboardStats, useHelpersOnLeaveToday } from "@/hooks/useDashboard";
+import { useHelpers } from "@/hooks/useHelpers";
 import { formatDate } from "@/lib/utils";
 
 export default function DashboardPage() {
@@ -16,8 +16,8 @@ export default function DashboardPage() {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const { data: stats } = useDashboardStats();
-  const { data: workers } = useWorkers();
-  const { data: onLeaveTodayIds } = useWorkersOnLeaveToday();
+  const { data: workers } = useHelpers();
+  const { data: onLeaveTodayIds } = useHelpersOnLeaveToday();
 
   useEffect(() => {
     const getUser = async () => {
@@ -46,7 +46,7 @@ export default function DashboardPage() {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading...</p>
         </div>
       </div>
@@ -69,9 +69,9 @@ export default function DashboardPage() {
       {/* Main Content */}
       <div className="max-w-md mx-auto px-6 py-6 space-y-6">
         {/* Welcome Card */}
-        <div className="bg-gradient-to-r from-green-500 to-green-600 rounded-lg p-6 text-white shadow-md">
+        <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg p-6 text-white shadow-md">
           <h2 className="text-2xl font-bold mb-2">Welcome Back!</h2>
-          <p className="text-green-100">{formatDate(new Date())}</p>
+          <p className="text-blue-100">{formatDate(new Date())}</p>
         </div>
 
         {/* Today's Attendance Summary */}
@@ -81,9 +81,9 @@ export default function DashboardPage() {
           </h3>
           <div className="grid grid-cols-3 gap-3">
             {/* Present */}
-            <div className="bg-white rounded-lg p-4 border-l-4 border-green-500 shadow-sm">
+            <div className="bg-white rounded-lg p-4 border-l-4 border-blue-500 shadow-sm">
               <p className="text-gray-600 text-xs mb-2">Present</p>
-              <p className="text-3xl font-bold text-green-600">
+              <p className="text-3xl font-bold text-blue-600">
                 {stats?.present || 0}
               </p>
               <p className="text-xs text-gray-500 mt-1">workers</p>
@@ -129,7 +129,7 @@ export default function DashboardPage() {
             </div>
             <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
               <div
-                className="h-full bg-green-600 transition-all duration-300"
+                className="h-full bg-blue-600 transition-all duration-300"
                 style={{
                   width: `${
                     stats?.total
@@ -174,12 +174,12 @@ export default function DashboardPage() {
           <div className="space-y-3">
             <Link
               href="/attendance"
-              className="w-full block bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition-colors text-center text-base"
+              className="w-full block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors text-center text-base"
             >
               📋 Mark Today's Attendance
             </Link>
             <Link
-              href="/workers"
+              href="/helpers"
               className="w-full block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors text-center text-base"
             >
               👥 Manage Workers
@@ -218,7 +218,7 @@ export default function DashboardPage() {
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Attendance Status</span>
-              <span className="font-semibold text-green-600">Good</span>
+              <span className="font-semibold text-blue-600">Good</span>
             </div>
           </div>
         </div>

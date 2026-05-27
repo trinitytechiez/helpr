@@ -4,10 +4,10 @@ export const dynamic = "force-dynamic";
 
 import { useState } from "react";
 import Link from "next/link";
-import { useWorkers } from "@/hooks/useWorkers";
+import { useHelpers } from "@/hooks/useHelpers";
 
 export default function ReportsPage() {
-  const { data: workers, isLoading } = useWorkers();
+  const { data: workers, isLoading } = useHelpers();
   const [selectedWorker, setSelectedWorker] = useState<string | null>(null);
   const [selectedPeriod, setSelectedPeriod] = useState("MONTHLY");
 
@@ -33,7 +33,7 @@ export default function ReportsPage() {
           <select
             value={selectedWorker || ""}
             onChange={(e) => setSelectedWorker(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Choose a worker...</option>
             {activeWorkers.map((worker: any) => (
@@ -53,7 +53,7 @@ export default function ReportsPage() {
             <select
               value={selectedPeriod}
               onChange={(e) => setSelectedPeriod(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="DAILY">Daily</option>
               <option value="WEEKLY">Weekly</option>
@@ -68,14 +68,14 @@ export default function ReportsPage() {
           <div className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 space-y-4">
             <div className="text-center">
               <p className="text-gray-600 text-sm mb-1">Gross Salary</p>
-              <p className="text-4xl font-bold text-green-600">₹0</p>
+              <p className="text-4xl font-bold text-blue-600">₹0</p>
               <p className="text-xs text-gray-500 mt-2">Calculated salary for period</p>
             </div>
 
             <div className="border-t border-gray-200 pt-4 grid grid-cols-2 gap-4">
               <div className="text-center">
                 <p className="text-gray-600 text-sm mb-1">Days Present</p>
-                <p className="text-2xl font-bold text-green-600">0</p>
+                <p className="text-2xl font-bold text-blue-600">0</p>
               </div>
               <div className="text-center">
                 <p className="text-gray-600 text-sm mb-1">Days Absent</p>
@@ -107,7 +107,7 @@ export default function ReportsPage() {
 
         {/* Export Button */}
         {selectedWorker && (
-          <button className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg transition-colors">
+          <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-colors">
             📥 Export to Excel
           </button>
         )}

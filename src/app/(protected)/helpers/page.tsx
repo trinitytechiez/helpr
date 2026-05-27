@@ -4,11 +4,11 @@ export const dynamic = "force-dynamic";
 
 import { useState } from "react";
 import Link from "next/link";
-import { useWorkers, useDeleteWorker } from "@/hooks/useWorkers";
+import { useHelpers, useDeleteWorker } from "@/hooks/useHelpers";
 import { formatDate } from "@/lib/utils";
 
 export default function WorkersPage() {
-  const { data: workers, isLoading, error } = useWorkers();
+  const { data: workers, isLoading, error } = useHelpers();
   const deleteWorker = useDeleteWorker();
   const [searchTerm, setSearchTerm] = useState("");
   const [filterActive, setFilterActive] = useState<boolean | null>(null);
@@ -31,8 +31,8 @@ export default function WorkersPage() {
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-2xl font-bold text-gray-900">Workers</h1>
             <Link
-              href="/workers/add"
-              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors"
+              href="/helpers/add"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors"
             >
               + Add Worker
             </Link>
@@ -45,7 +45,7 @@ export default function WorkersPage() {
               placeholder="Search by name..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
             <div className="flex gap-2">
@@ -53,7 +53,7 @@ export default function WorkersPage() {
                 onClick={() => setFilterActive(null)}
                 className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
                   filterActive === null
-                    ? "bg-green-600 text-white"
+                    ? "bg-blue-600 text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
               >
@@ -63,7 +63,7 @@ export default function WorkersPage() {
                 onClick={() => setFilterActive(true)}
                 className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
                   filterActive === true
-                    ? "bg-green-600 text-white"
+                    ? "bg-blue-600 text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
               >
@@ -73,7 +73,7 @@ export default function WorkersPage() {
                 onClick={() => setFilterActive(false)}
                 className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
                   filterActive === false
-                    ? "bg-green-600 text-white"
+                    ? "bg-blue-600 text-white"
                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
               >
@@ -88,7 +88,7 @@ export default function WorkersPage() {
       <div className="max-w-2xl mx-auto px-6 py-6 pb-24">
         {isLoading ? (
           <div className="text-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
             <p className="text-gray-600">Loading workers...</p>
           </div>
         ) : error ? (
@@ -101,8 +101,8 @@ export default function WorkersPage() {
           <div className="text-center py-12">
             <p className="text-gray-600 mb-4">No workers found</p>
             <Link
-              href="/workers/add"
-              className="text-green-600 hover:text-green-700 font-semibold"
+              href="/helpers/add"
+              className="text-blue-600 hover:text-blue-700 font-semibold"
             >
               Create your first worker
             </Link>
@@ -124,7 +124,7 @@ export default function WorkersPage() {
                   <span
                     className={`px-2 py-1 rounded text-xs font-semibold ${
                       worker.isActive
-                        ? "bg-green-100 text-green-800"
+                        ? "bg-blue-100 text-blue-800"
                         : "bg-gray-100 text-gray-800"
                     }`}
                   >

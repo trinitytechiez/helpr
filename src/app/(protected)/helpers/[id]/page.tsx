@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useWorker, useUpdateWorker } from "@/hooks/useWorkers";
+import { useWorker, useUpdateWorker } from "@/hooks/useHelpers";
 import { formatDate } from "@/lib/utils";
 
 export default function EditWorkerPage({
@@ -38,7 +38,7 @@ export default function EditWorkerPage({
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading worker...</p>
         </div>
       </div>
@@ -61,7 +61,7 @@ export default function EditWorkerPage({
         salaryAmount: parseFloat(formData.salaryAmount),
         designatedLeaves: parseInt(formData.designatedLeaves),
       });
-      router.push("/workers");
+      router.push("/helpers");
     } catch (err: any) {
       setError(err.message);
     }
@@ -71,8 +71,8 @@ export default function EditWorkerPage({
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-md mx-auto px-6 py-8">
         <Link
-          href="/workers"
-          className="text-green-600 hover:text-green-700 text-sm font-medium mb-6 inline-block"
+          href="/helpers"
+          className="text-blue-600 hover:text-blue-700 text-sm font-medium mb-6 inline-block"
         >
           ← Back to Workers
         </Link>
@@ -87,7 +87,7 @@ export default function EditWorkerPage({
             onClick={() => setTab("details")}
             className={`px-4 py-2 font-medium border-b-2 transition-colors ${
               tab === "details"
-                ? "border-green-600 text-green-600"
+                ? "border-blue-600 text-blue-600"
                 : "border-transparent text-gray-600 hover:text-gray-900"
             }`}
           >
@@ -97,7 +97,7 @@ export default function EditWorkerPage({
             onClick={() => setTab("salary")}
             className={`px-4 py-2 font-medium border-b-2 transition-colors ${
               tab === "salary"
-                ? "border-green-600 text-green-600"
+                ? "border-blue-600 text-blue-600"
                 : "border-transparent text-gray-600 hover:text-gray-900"
             }`}
           >
@@ -107,7 +107,7 @@ export default function EditWorkerPage({
             onClick={() => setTab("status")}
             className={`px-4 py-2 font-medium border-b-2 transition-colors ${
               tab === "status"
-                ? "border-green-600 text-green-600"
+                ? "border-blue-600 text-blue-600"
                 : "border-transparent text-gray-600 hover:text-gray-900"
             }`}
           >
@@ -129,7 +129,7 @@ export default function EditWorkerPage({
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
@@ -143,7 +143,7 @@ export default function EditWorkerPage({
                   onChange={(e) =>
                     setFormData({ ...formData, phone: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
@@ -157,7 +157,7 @@ export default function EditWorkerPage({
                   onChange={(e) =>
                     setFormData({ ...formData, category: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
@@ -171,7 +171,7 @@ export default function EditWorkerPage({
                   onChange={(e) =>
                     setFormData({ ...formData, department: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
@@ -185,7 +185,7 @@ export default function EditWorkerPage({
                   onChange={(e) =>
                     setFormData({ ...formData, joinDate: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
             </>
@@ -203,7 +203,7 @@ export default function EditWorkerPage({
                   onChange={(e) =>
                     setFormData({ ...formData, salaryType: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   <option value="DAILY">Daily</option>
                   <option value="WEEKLY">Weekly</option>
@@ -224,7 +224,7 @@ export default function EditWorkerPage({
                   onChange={(e) =>
                     setFormData({ ...formData, salaryAmount: e.target.value })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
@@ -242,7 +242,7 @@ export default function EditWorkerPage({
                       designatedLeaves: e.target.value,
                     })
                   }
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
@@ -256,7 +256,7 @@ export default function EditWorkerPage({
                       leaveCarryover: e.target.checked,
                     })
                   }
-                  className="w-4 h-4 text-green-600 rounded"
+                  className="w-4 h-4 text-blue-600 rounded"
                 />
                 <span className="ml-2 text-sm text-gray-700">
                   Allow unused leaves to carry forward
@@ -274,7 +274,7 @@ export default function EditWorkerPage({
                   <span
                     className={`font-semibold ${
                       formData.isActive
-                        ? "text-green-600"
+                        ? "text-blue-600"
                         : "text-red-600"
                     }`}
                   >
@@ -292,7 +292,7 @@ export default function EditWorkerPage({
                   className={`w-full px-4 py-2 rounded-lg font-semibold transition-colors ${
                     formData.isActive
                       ? "bg-red-600 hover:bg-red-700 text-white"
-                      : "bg-green-600 hover:bg-green-700 text-white"
+                      : "bg-blue-600 hover:bg-blue-700 text-white"
                   }`}
                 >
                   Mark as {formData.isActive ? "Inactive" : "Active"}
@@ -313,12 +313,12 @@ export default function EditWorkerPage({
             <button
               type="submit"
               disabled={updateWorker.isPending}
-              className="flex-1 h-12 bg-green-600 hover:bg-green-700 disabled:opacity-50 text-white font-semibold rounded-lg transition-colors"
+              className="flex-1 h-12 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-semibold rounded-lg transition-colors"
             >
               {updateWorker.isPending ? "Saving..." : "Save Changes"}
             </button>
             <Link
-              href="/workers"
+              href="/helpers"
               className="flex-1 h-12 bg-gray-300 hover:bg-gray-400 text-gray-900 font-semibold rounded-lg transition-colors flex items-center justify-center"
             >
               Cancel

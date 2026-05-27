@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { useCreateWorker } from "@/hooks/useWorkers";
+import { useCreateWorker } from "@/hooks/useHelpers";
 
 export default function AddWorkerPage() {
   const router = useRouter();
@@ -39,7 +39,7 @@ export default function AddWorkerPage() {
         salaryAmount: parseFloat(formData.salaryAmount),
         designatedLeaves: parseInt(formData.designatedLeaves),
       });
-      router.push("/workers");
+      router.push("/helpers");
     } catch (err: any) {
       setError(err.message);
     }
@@ -49,8 +49,8 @@ export default function AddWorkerPage() {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-md mx-auto px-6 py-8">
         <Link
-          href="/workers"
-          className="text-green-600 hover:text-green-700 text-sm font-medium mb-6 inline-block"
+          href="/helpers"
+          className="text-blue-600 hover:text-blue-700 text-sm font-medium mb-6 inline-block"
         >
           ← Back to Workers
         </Link>
@@ -70,7 +70,7 @@ export default function AddWorkerPage() {
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="John Doe"
             />
           </div>
@@ -86,7 +86,7 @@ export default function AddWorkerPage() {
               onChange={(e) =>
                 setFormData({ ...formData, phone: e.target.value })
               }
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="+91 98765 43210"
             />
           </div>
@@ -102,7 +102,7 @@ export default function AddWorkerPage() {
               onChange={(e) =>
                 setFormData({ ...formData, category: e.target.value })
               }
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="e.g., Manager, Operator"
             />
           </div>
@@ -118,7 +118,7 @@ export default function AddWorkerPage() {
               onChange={(e) =>
                 setFormData({ ...formData, department: e.target.value })
               }
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="e.g., Operations"
             />
           </div>
@@ -135,7 +135,7 @@ export default function AddWorkerPage() {
               onChange={(e) =>
                 setFormData({ ...formData, joinDate: e.target.value })
               }
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -150,7 +150,7 @@ export default function AddWorkerPage() {
               onChange={(e) =>
                 setFormData({ ...formData, salaryType: e.target.value })
               }
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="DAILY">Daily</option>
               <option value="WEEKLY">Weekly</option>
@@ -173,7 +173,7 @@ export default function AddWorkerPage() {
               onChange={(e) =>
                 setFormData({ ...formData, salaryAmount: e.target.value })
               }
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="25000"
             />
           </div>
@@ -190,7 +190,7 @@ export default function AddWorkerPage() {
               onChange={(e) =>
                 setFormData({ ...formData, designatedLeaves: e.target.value })
               }
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="12"
             />
           </div>
@@ -207,12 +207,12 @@ export default function AddWorkerPage() {
             <button
               type="submit"
               disabled={createWorker.isPending}
-              className="flex-1 h-12 bg-green-600 hover:bg-green-700 disabled:opacity-50 text-white font-semibold rounded-lg transition-colors"
+              className="flex-1 h-12 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-semibold rounded-lg transition-colors"
             >
               {createWorker.isPending ? "Creating..." : "Add Worker"}
             </button>
             <Link
-              href="/workers"
+              href="/helpers"
               className="flex-1 h-12 bg-gray-300 hover:bg-gray-400 text-gray-900 font-semibold rounded-lg transition-colors flex items-center justify-center"
             >
               Cancel

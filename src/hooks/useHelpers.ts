@@ -14,11 +14,11 @@ export interface WorkerFormData {
 
 const WORKERS_QUERY_KEY = ["workers"];
 
-export function useWorkers() {
+export function useHelpers() {
   return useQuery({
     queryKey: WORKERS_QUERY_KEY,
     queryFn: async () => {
-      const response = await fetch("/api/workers");
+      const response = await fetch("/api/helpers");
       if (!response.ok) throw new Error("Failed to fetch workers");
       return response.json();
     },
@@ -29,7 +29,7 @@ export function useWorker(id: string) {
   return useQuery({
     queryKey: [...WORKERS_QUERY_KEY, id],
     queryFn: async () => {
-      const response = await fetch(`/api/workers/${id}`);
+      const response = await fetch(`/api/helpers/${id}`);
       if (!response.ok) throw new Error("Worker not found");
       return response.json();
     },
@@ -42,7 +42,7 @@ export function useCreateWorker() {
 
   return useMutation({
     mutationFn: async (data: WorkerFormData) => {
-      const response = await fetch("/api/workers", {
+      const response = await fetch("/api/helpers", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -61,7 +61,7 @@ export function useUpdateWorker(id: string) {
 
   return useMutation({
     mutationFn: async (data: Partial<WorkerFormData>) => {
-      const response = await fetch(`/api/workers/${id}`, {
+      const response = await fetch(`/api/helpers/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
@@ -81,7 +81,7 @@ export function useDeleteWorker() {
 
   return useMutation({
     mutationFn: async (id: string) => {
-      const response = await fetch(`/api/workers/${id}`, {
+      const response = await fetch(`/api/helpers/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) throw new Error("Failed to delete worker");
