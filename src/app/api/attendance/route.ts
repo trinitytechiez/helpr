@@ -17,7 +17,7 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const targetDate = new Date(date);
+    const targetDate = new Date(date as string);
     targetDate.setHours(0, 0, 0, 0);
 
     const nextDate = new Date(targetDate);
@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const targetDate = new Date(date);
+    const targetDate = new Date(date as string);
     targetDate.setHours(0, 0, 0, 0);
 
     const attendance = await prisma.attendance.upsert({
@@ -66,10 +66,7 @@ export async function POST(request: NextRequest) {
           date: targetDate,
         },
       },
-      update: {
-        status,
-        note: note || null,
-      },
+      update: { status, note: note || null },
       create: {
         helperId,
         date: targetDate,
@@ -87,23 +84,22 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// POST bulk mark attendance
+// PUT bulk mark attendance
 export async function PUT(request: NextRequest) {
   try {
     const { prisma } = await import("@/lib/prisma");
-    const body = await request.json();
-    const { records } = body;
+    const records = await request.json();
 
-    if (!Array.isArray(records)) {
+    if (!Array.isArray(records) || records.length === 0) {
       return NextResponse.json(
-        { message: "Records must be an array" },
+        { message: "Records array is required" },
         { status: 400 }
       );
     }
 
     const results = await Promise.all(
       records.map((record: any) => {
-        const targetDate = new Date(record.date);
+        const targetDate = new Date(record.date as string);
         targetDate.setHours(0, 0, 0, 0);
 
         return prisma.attendance.upsert({
@@ -113,15 +109,11 @@ export async function PUT(request: NextRequest) {
               date: targetDate,
             },
           },
-          update: {
-            status: record.status,
-            note: record.note || null,
-          },
+          update: { status: record.status },
           create: {
             helperId: record.helperId,
             date: targetDate,
             status: record.status,
-            note: record.note || null,
           },
         });
       })
@@ -130,7 +122,7 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json(results);
   } catch (error: any) {
     return NextResponse.json(
-      { message: error.message || "Failed to update attendance" },
+      { message: error.message || "Failed to bulk mark attendance" },
       { status: 500 }
     );
   }

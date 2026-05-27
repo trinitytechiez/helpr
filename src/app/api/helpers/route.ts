@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST create worker
+// POST create helper
 export async function POST(request: NextRequest) {
   try {
     const { prisma } = await import("@/lib/prisma");
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const worker = await prisma.helper.create({
+    const helper = await prisma.helper.create({
       data: {
         name,
         phone: phone || null,
@@ -57,10 +57,10 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    return NextResponse.json(worker, { status: 201 });
+    return NextResponse.json(helper, { status: 201 });
   } catch (error: any) {
     return NextResponse.json(
-      { message: error.message || "Failed to create worker" },
+      { message: error.message || "Failed to create helper" },
       { status: 500 }
     );
   }

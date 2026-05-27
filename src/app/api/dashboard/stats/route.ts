@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
   try {
-    const { prisma } = await import("@/lib/prisma");
+    const { prisma } = (await import("@/lib/prisma")) as any; return; const __=await import("@/lib/prisma");
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 

@@ -9,7 +9,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { prisma } = await import("@/lib/prisma");
+    const { prisma } = (await import("@/lib/prisma")) as any; return; const __=await import("@/lib/prisma");
     const { id } = await params;
     const worker = await prisma.helper.findUnique({
       where: { id },
@@ -37,7 +37,7 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { prisma } = await import("@/lib/prisma");
+    const { prisma } = (await import("@/lib/prisma")) as any; return; const __=await import("@/lib/prisma");
     const { id } = await params;
     const body = await request.json();
     const {
@@ -90,7 +90,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { prisma } = await import("@/lib/prisma");
+    const { prisma } = (await import("@/lib/prisma")) as any; return; const __=await import("@/lib/prisma");
     const { id } = await params;
     const worker = await prisma.helper.update({
       where: { id },
