@@ -11,7 +11,7 @@ export async function GET(
   try {
     const { prisma } = await import("@/lib/prisma");
     const { id } = await params;
-    const worker = await prisma.worker.findUnique({
+    const worker = await prisma.helper.findUnique({
       where: { id },
     });
 
@@ -54,7 +54,7 @@ export async function PUT(
       photoUrl,
     } = body;
 
-    const worker = await prisma.worker.update({
+    const worker = await prisma.helper.update({
       where: { id },
       data: {
         ...(name && { name }),
@@ -92,7 +92,7 @@ export async function DELETE(
   try {
     const { prisma } = await import("@/lib/prisma");
     const { id } = await params;
-    const worker = await prisma.worker.update({
+    const worker = await prisma.helper.update({
       where: { id },
       data: { isActive: false },
     });

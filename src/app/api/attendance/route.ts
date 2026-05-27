@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
           lt: nextDate,
         },
       },
-      include: { worker: true },
+      include: { helper: true },
     });
 
     return NextResponse.json(attendance);
@@ -47,9 +47,9 @@ export async function POST(request: NextRequest) {
   try {
     const { prisma } = await import("@/lib/prisma");
     const body = await request.json();
-    const { workerId, date, status, note } = body;
+    const { helperId, date, status, note } = body;
 
-    if (!workerId || !date || !status) {
+    if (!helperId || !date || !status) {
       return NextResponse.json(
         { message: "Missing required fields" },
         { status: 400 }
@@ -61,8 +61,8 @@ export async function POST(request: NextRequest) {
 
     const attendance = await prisma.attendance.upsert({
       where: {
-        workerId_date: {
-          workerId,
+        helperId_date: {
+          helperId,
           date: targetDate,
         },
       },
@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
         note: note || null,
       },
       create: {
-        workerId,
+        helperId,
         date: targetDate,
         status,
         note: note || null,
@@ -108,8 +108,8 @@ export async function PUT(request: NextRequest) {
 
         return prisma.attendance.upsert({
           where: {
-            workerId_date: {
-              workerId: record.workerId,
+            helperId_date: {
+              helperId: record.helperId,
               date: targetDate,
             },
           },
@@ -118,7 +118,7 @@ export async function PUT(request: NextRequest) {
             note: record.note || null,
           },
           create: {
-            workerId: record.workerId,
+            helperId: record.helperId,
             date: targetDate,
             status: record.status,
             note: record.note || null,

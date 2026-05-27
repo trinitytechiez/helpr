@@ -3,18 +3,18 @@ import { NextRequest, NextResponse } from "next/server";
 // Prevent pre-rendering during build
 export const dynamic = "force-dynamic";
 
-// GET all workers
+// GET all helpers
 export async function GET(request: NextRequest) {
   try {
     const { prisma } = await import("@/lib/prisma");
-    const workers = await prisma.worker.findMany({
+    const helpers = await prisma.helper.findMany({
       orderBy: { createdAt: "desc" },
     });
 
-    return NextResponse.json(workers);
+    return NextResponse.json(helpers);
   } catch (error: any) {
     return NextResponse.json(
-      { message: error.message || "Failed to fetch workers" },
+      { message: error.message || "Failed to fetch helpers" },
       { status: 500 }
     );
   }
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const worker = await prisma.worker.create({
+    const worker = await prisma.helper.create({
       data: {
         name,
         phone: phone || null,
